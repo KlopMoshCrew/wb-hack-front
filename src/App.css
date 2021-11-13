@@ -1,5 +1,8 @@
+* {
+  font-family: 'Montserrat', sans-serif;
+}
 .App {
-  background-color: #130522;
+  background-color: #ffffff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,3 +16,24 @@
  width: 100%;
 }
 
+.Bar-line {
+  width: 100%;
+}
+
+.container-fluid {
+  background-color: #481173;
+}
+
+.navbar-light .navbar-toggler {
+  background-color: white;
+}
+
+.navbar {
+  border-radius: 30px;
+  width: 100%;
+  margin-right: 100rem;
+}
+
+h2 {
+  color: black;
+}

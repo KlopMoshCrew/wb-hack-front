@@ -12,9 +12,10 @@ import {
     Button,
     NavDropdown
 } from "react-bootstrap";
+import icon from './img/icon.png'
 
 const footerStyle = {
-    backgroundColor: "purple",
+    backgroundColor: "#481173",
     fontSize: "20px",
     color: "white",
     borderTop: "1px solid #E7E7E7",
@@ -113,82 +114,25 @@ function App() {
 
 
     const dataBar = {
-        labels: ['Янв', 'Февр', 'Март', 'Апр', 'Май', 'Июнь'],
-        datasets: [
-            {
-                label: 'Продажа плова',
-                data: [12, 19, 3, 5, 2, 3],
-                fill: false,
-                pointRadius: 5,
-                pointBorderColor: '#ffffff',
-                tension: 0.1,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(201, 203, 207, 0.2)'
-                ],
-                borderColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)'
-                ],
-            },
-            {
-                label: 'Line Dataset',
-                data: [10, 15, 8, 15, 25, 15],
-                fill: false,
-                pointRadius: 5,
-                pointBorderColor: 'red',
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(255, 205, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(201, 203, 207, 0.2)'
-                ],
-                borderColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(255, 159, 64)',
-                    'rgb(255, 205, 86)',
-                    'rgb(75, 192, 192)',
-                    'rgb(54, 162, 235)',
-                    'rgb(153, 102, 255)',
-                    'rgb(201, 203, 207)'
-                ],
-                tension: 0.1,
-            }
-        ],
+        labels: ["Organic", "Sponsored", "Organic", "Sponsored"],
+        previousDate: {
+            label: "08/10/2019 - 09/30/2019",
+            dataSet: [10000, 150000, 10000, 150000]
+        },
+        currentDate: {
+            label: "10/01/2019 - 11/20/2019",
+            dataSet: [10000, 225000, 10000, 225000]
+        }
     };
 
     const optionsBar = {
-        type: 'bar',
-        data: data,
-        options: {
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Chart.js Bar Chart - Stacked'
-                },
-            },
-            responsive: true,
-            scales: {
-                x: {
-                    stacked: true,
-                },
-                y: {
-                    stacked: true
-                }
-            }
+        scales: {
+            xAxes: [{
+                stacked: true
+            }],
+            yAxes: [{
+                stacked: true
+            }]
         }
     };
 
@@ -197,9 +141,9 @@ function App() {
     <div className="App">
         <div>
         <Navbar bg="light" expand={false}>
-            <Container fluid>
+            <Container fluid >
                 <Navbar.Brand href="#">
-                   Logo WB
+                   <img src={icon} width={100} height={100} />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="offcanvasNavbar" />
                 <Navbar.Offcanvas
@@ -242,7 +186,84 @@ function App() {
         <Line data={data} options={options} />
         </div>
         <div className="Dynamic-line">
-        <Bar data={dataBar} options={optionsBar}/>
+            <Bar
+                pointStyle="star"
+                data={{
+                    labels: dataBar.labels,
+                    responsive: true,
+                    offset: true,
+                    datasets: [
+                        {
+                            label: "Mobile",
+                            pointStyle: "rectRounded",
+                            backgroundColor: "#6ED3FF",
+                            barThickness: 40,
+                            categoryPercentage: 1,
+                            data: dataBar.previousDate.dataSet //From API
+                        },
+                        {
+                            label: "Desktop",
+                            backgroundColor: "#1497FF",
+                            barThickness: 40,
+                            categoryPercentage: 1,
+                            pointStyle: "triangle",
+                            data: dataBar.currentDate.dataSet //From API
+                        }
+                    ]
+                }}
+                height={220}
+                options={{
+                    offsetGridLines: true,
+                    drawTicks: true,
+                    layout: {
+                        padding: {
+                            top: 10,
+                            right: 20,
+                            bottom: 20
+                        }
+                    },
+                    legend: {
+                        display: true,
+                        position: "right",
+                        align: "start",
+                        labels: {
+                            usePointStyle: true
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [
+                            {
+                                stacked: true,
+                                ticks: {
+                                    padding: 5
+                                },
+                                gridLines: {
+                                    display: false
+                                }
+                            }
+                        ],
+                        yAxes: [
+                            {
+                                stacked: false,
+                                gridLines: {
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    beginAtZero: true,
+                                    maxTicksLimit: 6,
+                                    padding: 20,
+                                    callback(n) {
+                                        if (n < 1e3) return n;
+                                        if (n >= 1e3) return +(n / 1e3).toFixed(1) + "K";
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }}
+            />
         </div>
         <Footer>
             <span>Клоп в трубе © 2021</span>
