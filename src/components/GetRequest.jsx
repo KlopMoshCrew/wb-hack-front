@@ -3,13 +3,16 @@ import axios from 'axios';
 import {
     Table
 } from "react-bootstrap";
+import { Multiselect } from 'multiselect-react-dropdown';
 
 class GetRequest extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            Id: null
+            Id: null,
+            // options: [{name: 'Srigar', id: 1},{name: 'Sam', id: 2}],
+            items: []
         };
 
     }
@@ -17,14 +20,10 @@ class GetRequest extends React.Component {
 
     componentDidMount() {
         // Simple GET request using axios
-        axios.get('http://192.168.1.8:1337/items?limit=10&page=1')
-            .then((res) => { this.setState({Id: res.data[0].id}); console.log(res) } )
-
-        axios.get('http://192.168.1.8:1337/items?limit=10&page=1')
-            .then((resBrand) => { this.setState({resBrand: resBrand.data[0].brand}); console.log(resBrand) } )
-
-        axios.get('http://192.168.1.8:1337/items?limit=10&page=1')
-            .then((resVariant) => { this.setState({resVariant: resVariant.data[0].variant}); console.log(resVariant) } )
+        axios.get('http://192.168.1.8:1337/items?page=1')
+            .then((res) => { this.setState(
+                { items: res.data }
+                ) } )
     }
 
     render() {
@@ -32,39 +31,35 @@ class GetRequest extends React.Component {
         const { resBrand } = this.state;
         const { resVariant } = this.state;
         return (
-            <div className="card text-center m-3">
-                <h5 className="card-header" style={{color: "black"}}>Табличка</h5>
-                <div className="card-body" style={{color: "black"}}>
+            <div  style={{ alignItems: "center" }}>
+                <h5  style={{color: "black"}}>Табличка</h5>
+                <div  style={{color: "black"}}>
+                <Multiselect
+                    selectionLimit={1}
+                    options={this.state.items} // Options to display in the dropdown
+                    selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
+                    onSelect={this.onSelect} // Function will trigger on select event
+                    onRemove={this.onRemove} // Function will trigger on remove event
+                    displayValue="name" // Property name to display in the dropdown options
+                /> 
                     <Table striped bordered hover>
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Id</th>
-                            <th>Brand</th>
-                            <th>Variant</th>
+                            <th>Бренд</th>
+                            <th>Характеристики</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>{Id}</td>
-                            <td>{resBrand}</td>
-                            <td>{resVariant}</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>{Id}</td>
-                            <td>{resBrand}</td>
-                            <td>{resVariant}</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>{Id}</td>
-                            <td>{resBrand}</td>
-                            <td>{resVariant}</td>
-                        </tr>
+                        {
+                            this.state.items && this.state.items.map((item) => (
+                            <tr key={item.id}>
+                                <th>{ item.name }</th>
+                                <th>{ item.variant }</th>
+                            </tr>
+                            ))
+                        }
                         </tbody>
-                    </Table>
+                    </Table> 
                 </div>
             </div>
         );
