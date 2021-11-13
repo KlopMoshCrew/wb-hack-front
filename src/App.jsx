@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
 import {Bar, Line} from 'react-chartjs-2';
 import './App.css'
 import {
@@ -10,9 +11,12 @@ import {
     OffcanvasTitle,
     Nav,
     Button,
-    NavDropdown
+    NavDropdown,
+    Table
 } from "react-bootstrap";
 import icon from './img/icon.png'
+import {GetRequest} from "./components/GetRequest";
+
 
 const footerStyle = {
     backgroundColor: "#481173",
@@ -136,6 +140,9 @@ function App() {
         }
     };
 
+    // fetch('http://192.168.1.8:1337/items?limit=10&page=1')
+    //     .then(response => response.json())
+    //     .then(res => console.log(res));
 
     return (
     <div className="App">
@@ -180,11 +187,13 @@ function App() {
                 </Navbar.Offcanvas>
             </Container>
         </Navbar>
+
         </div>
         <div className="Dynamic-line">
         <h2>Сравнение цен узбекского плова</h2>
         <Line data={data} options={options} />
         </div>
+
         <div className="Dynamic-line">
             <Bar
                 pointStyle="star"
@@ -264,6 +273,9 @@ function App() {
                     }
                 }}
             />
+        </div>
+        <div className="app">
+            <GetRequest />
         </div>
         <Footer>
             <span>Клоп в трубе © 2021</span>
