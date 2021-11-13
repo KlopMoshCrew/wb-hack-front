@@ -95,6 +95,103 @@ function App() {
         }
     };
 
+    const DATA_COUNT = 7;
+    const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
+
+    const actions = [
+        {
+            name: 'Randomize',
+            handler(chart) {
+                chart.data.datasets.forEach(dataset => {
+                    dataset.data = Utils.numbers({count: chart.data.labels.length, min: -100, max: 100});
+                });
+                chart.update();
+            }
+        },
+    ];
+
+
+
+    const dataBar = {
+        labels: ['Янв', 'Февр', 'Март', 'Апр', 'Май', 'Июнь'],
+        datasets: [
+            {
+                label: 'Продажа плова',
+                data: [12, 19, 3, 5, 2, 3],
+                fill: false,
+                pointRadius: 5,
+                pointBorderColor: '#ffffff',
+                tension: 0.1,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                ],
+            },
+            {
+                label: 'Line Dataset',
+                data: [10, 15, 8, 15, 25, 15],
+                fill: false,
+                pointRadius: 5,
+                pointBorderColor: 'red',
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                ],
+                tension: 0.1,
+            }
+        ],
+    };
+
+    const optionsBar = {
+        type: 'bar',
+        data: data,
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Chart.js Bar Chart - Stacked'
+                },
+            },
+            responsive: true,
+            scales: {
+                x: {
+                    stacked: true,
+                },
+                y: {
+                    stacked: true
+                }
+            }
+        }
+    };
+
 
     return (
     <div className="App">
@@ -144,7 +241,9 @@ function App() {
         <h2>Сравнение цен узбекского плова</h2>
         <Line data={data} options={options} />
         </div>
-        <Bar data={data} options={options} />
+        <div className="Dynamic-line">
+        <Bar data={dataBar} options={optionsBar}/>
+        </div>
         <Footer>
             <span>Клоп в трубе © 2021</span>
         </Footer>
