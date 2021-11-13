@@ -18,13 +18,13 @@ class GetRequest extends React.Component {
     componentDidMount() {
         // Simple GET request using axios
         axios.get('http://192.168.1.8:1337/items?limit=10&page=1')
-            .then((res) => { this.setState({Id: res.data[0].id})})
+            .then((res) => { this.setState({Id: res.data[0].id}); console.log(res) } )
 
         axios.get('http://192.168.1.8:1337/items?limit=10&page=1')
-            .then((resBrand) => { this.setState({resBrand: resBrand.data[0].brand})})
+            .then((resBrand) => { this.setState({resBrand: resBrand.data[0].brand}); console.log(resBrand) } )
 
         axios.get('http://192.168.1.8:1337/items?limit=10&page=1')
-            .then((resVariant) => { this.setState({resVariant: resVariant.data[0].variant})} )
+            .then((resVariant) => { this.setState({resVariant: resVariant.data[0].variant}); console.log(resVariant) } )
     }
 
     render() {
@@ -38,22 +38,31 @@ class GetRequest extends React.Component {
                     <Table striped bordered hover>
                         <thead>
                         <tr>
+                            <th>#</th>
                             <th>Id</th>
                             <th>Brand</th>
                             <th>Variant</th>
                         </tr>
                         </thead>
-                        {
-                            data[0].id.map( (item) => (
-                                <tr key={Id}>
-                                    <td>{Id}</td>
-                                    <td>{resBrand}</td>
-                                    <td>{resVariant}</td>
-                                </tr>
-                            ))
-                        }
                         <tbody>
-
+                        <tr>
+                            <td>1</td>
+                            <td>{Id}</td>
+                            <td>{resBrand}</td>
+                            <td>{resVariant}</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>{Id}</td>
+                            <td>{resBrand}</td>
+                            <td>{resVariant}</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>{Id}</td>
+                            <td>{resBrand}</td>
+                            <td>{resVariant}</td>
+                        </tr>
                         </tbody>
                     </Table>
                 </div>
