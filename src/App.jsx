@@ -16,6 +16,7 @@ import {
 } from "react-bootstrap";
 import icon from './img/icon.png'
 import {GetRequest} from "./components/GetRequest";
+import {FunnelSeries} from "./components/FunnelSeries";
 
 
 const footerStyle = {
@@ -194,87 +195,7 @@ function App() {
         <Line data={data} options={options} />
         </div>
 
-        <div className="Dynamic-line">
-            <Bar
-                pointStyle="star"
-                data={{
-                    labels: dataBar.labels,
-                    responsive: true,
-                    offset: true,
-                    datasets: [
-                        {
-                            label: "Mobile",
-                            pointStyle: "rectRounded",
-                            backgroundColor: "#6ED3FF",
-                            barThickness: 40,
-                            categoryPercentage: 1,
-                            data: dataBar.previousDate.dataSet //From API
-                        },
-                        {
-                            label: "Desktop",
-                            backgroundColor: "#1497FF",
-                            barThickness: 40,
-                            categoryPercentage: 1,
-                            pointStyle: "triangle",
-                            data: dataBar.currentDate.dataSet //From API
-                        }
-                    ]
-                }}
-                height={220}
-                options={{
-                    offsetGridLines: true,
-                    drawTicks: true,
-                    layout: {
-                        padding: {
-                            top: 10,
-                            right: 20,
-                            bottom: 20
-                        }
-                    },
-                    legend: {
-                        display: true,
-                        position: "right",
-                        align: "start",
-                        labels: {
-                            usePointStyle: true
-                        }
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        xAxes: [
-                            {
-                                stacked: true,
-                                ticks: {
-                                    padding: 5
-                                },
-                                gridLines: {
-                                    display: false
-                                }
-                            }
-                        ],
-                        yAxes: [
-                            {
-                                stacked: false,
-                                gridLines: {
-                                    drawBorder: false
-                                },
-                                ticks: {
-                                    beginAtZero: true,
-                                    maxTicksLimit: 6,
-                                    padding: 20,
-                                    callback(n) {
-                                        if (n < 1e3) return n;
-                                        if (n >= 1e3) return +(n / 1e3).toFixed(1) + "K";
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                }}
-            />
-        </div>
-        <div className="app">
+        <div>
             <GetRequest />
         </div>
         <Footer>

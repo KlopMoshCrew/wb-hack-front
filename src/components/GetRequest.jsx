@@ -4,6 +4,7 @@ import {
     Table
 } from "react-bootstrap";
 import { Multiselect } from 'multiselect-react-dropdown';
+import { FunnelSeries } from './FunnelSeries';
 
 class GetRequest extends React.Component {
     constructor(props) {
@@ -11,9 +12,12 @@ class GetRequest extends React.Component {
 
         this.state = {
             Id: null,
-            // options: [{name: 'Srigar', id: 1},{name: 'Sam', id: 2}],
             items: []
         };
+
+        this.onSelect = this.onSelect.bind(this)
+
+        this.childRef = React.createRef();
 
     }
 
@@ -21,25 +25,26 @@ class GetRequest extends React.Component {
     componentDidMount() {
         // Simple GET request using axios
         axios.get('http://192.168.1.8:1337/items?page=1')
-            .then((res) => { this.setState(
-                { items: res.data }
-                ) } )
+            .then((res) => { this.setState({ items: res.data }) } )
+    }
+
+    onSelect(selectedList, selectedItem) {
+        this.setState({Id: selectedItem.id})
     }
 
     render() {
-        const { Id } = this.state;
-        const { resBrand } = this.state;
-        const { resVariant } = this.state;
         return (
+        <div>
+            <FunnelSeries id={this.state.Id} key={this.state.Id} ref={this.childRef}/>
             <div  style={{ alignItems: "center" }}>
                 <h5  style={{color: "black"}}>Табличка</h5>
                 <div  style={{color: "black"}}>
                 <Multiselect
                     selectionLimit={1}
                     options={this.state.items} // Options to display in the dropdown
-                    selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
+                    // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
                     onSelect={this.onSelect} // Function will trigger on select event
-                    onRemove={this.onRemove} // Function will trigger on remove event
+                    // onRemove={this.onRemove} // Function will trigger on remove event
                     displayValue="name" // Property name to display in the dropdown options
                 /> 
                     <Table striped bordered hover>
@@ -62,6 +67,7 @@ class GetRequest extends React.Component {
                     </Table> 
                 </div>
             </div>
+        </div>
         );
     }
 }
