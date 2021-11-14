@@ -11,6 +11,8 @@ import {
     parseDate,
 } from 'react-day-picker/moment';
 
+import {SallersFunnel} from "./SallersFunnel";
+
 class FunnelSeries extends React.Component {
     constructor(props) {
         super(props);
@@ -100,6 +102,7 @@ class FunnelSeries extends React.Component {
                     onDayChange={this.onToChange}
                 />
                 <Bar data={this.state.data} options={this.state.options} />
+                <SallersFunnel ecom_id={this.state.id} from={formatDate(this.state.from, 'YYYY-MM-DD')} to={formatDate(this.state.to, 'YYYY-MM-DD')}/>
             </div>
         )
     }

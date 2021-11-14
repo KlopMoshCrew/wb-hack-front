@@ -193,7 +193,6 @@ function App() {
         </div>
         <div className="Dynamic-line">
             <h2>Сравнение цен узбекского плова</h2>
-            <SallersFunnel ecom_id={"8360E6D158AEBD26BBBE835C38F88748"} from={"2021-01-01"} to={"2021-12-01"}/>
         </div>
 
         <div>
