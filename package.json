@@ -2,7 +2,7 @@
   "name": "vite-project",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 80 --host 0.0.0.0",
     "build": "vite build",
     "serve": "vite preview"
   },
