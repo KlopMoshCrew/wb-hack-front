@@ -42,7 +42,7 @@ class FunnelSeries extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://127.0.0.1:1337/items?page=1')
+        axios.get('http://192.168.1.8:1337/items?page=1')
             .then((res) => { this.setState({ items: res.data }) })
 
 
