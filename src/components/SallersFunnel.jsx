@@ -37,7 +37,22 @@ class SallersFunnel extends React.Component {
         // HELLO PIDR
         return (
             <Plot
-                
+                data={[
+                {
+                    type: 'funnel',
+                    y: ["Просмотр в поисковой выдаче",
+                        "Просмотр карточки товара",
+                        "Добавление в корзину",
+                        "Оформление заказа",
+                        "Выкуп"],
+                    x: [
+                        this.state.view_item_list,
+                        this.state.view_item,
+                        this.state.add_to_cart,
+                        this.state.begin_checkout,
+                        this.state.purchase],
+                    hoverinfo: 'x+percent previous+percent initial'}
+                ]}
                 layout={ {width: 1000, height: 500, title: 'Продуктовая воронка зв период '} }
             />
         )
