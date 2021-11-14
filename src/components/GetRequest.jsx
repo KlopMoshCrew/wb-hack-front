@@ -24,7 +24,7 @@ class GetRequest extends React.Component {
 
     componentDidMount() {
         // Simple GET request using axios
-        axios.get('http://192.168.1.8:1337/items?page=1')
+        axios.get('http://127.0.0.1:1337/items?page=1')
             .then((res) => { this.setState({ items: res.data }) } )
     }
 
@@ -37,8 +37,6 @@ class GetRequest extends React.Component {
         <div>
             <FunnelSeries id={this.state.Id} key={this.state.Id} ref={this.childRef}/>
             <div  style={{ alignItems: "center" }}>
-                <h5  style={{color: "black"}}>Табличка</h5>
-                <div  style={{color: "black"}}>
                 <Multiselect
                     selectionLimit={1}
                     options={this.state.items} // Options to display in the dropdown
@@ -47,6 +45,8 @@ class GetRequest extends React.Component {
                     // onRemove={this.onRemove} // Function will trigger on remove event
                     displayValue="name" // Property name to display in the dropdown options
                 /> 
+                <h5  style={{color: "black"}}>Табличка</h5>
+                <div  style={{color: "black"}}>
                     <Table striped bordered hover>
                         <thead>
                         <tr>
