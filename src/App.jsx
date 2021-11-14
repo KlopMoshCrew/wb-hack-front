@@ -191,9 +191,6 @@ function App() {
         </Navbar>
 
         </div>
-        <div className="Dynamic-line">
-            <h2>Сравнение цен узбекского плова</h2>
-        </div>
 
         <div>
             <FunnelSeries />
