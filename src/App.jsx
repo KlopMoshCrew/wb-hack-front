@@ -17,6 +17,7 @@ import {
 import icon from './img/icon.png'
 import {GetRequest} from "./components/GetRequest";
 import {FunnelSeries} from "./components/FunnelSeries";
+import {SallersFunnel} from "./components/SallersFunnel"
 
 
 const footerStyle = {
