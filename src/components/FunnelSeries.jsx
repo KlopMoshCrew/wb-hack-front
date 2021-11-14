@@ -44,7 +44,7 @@ class FunnelSeries extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://192.168.1.8:1337/items?page=1')
+        axios.get('http://82.148.28.184:1337/items?page=1')
             .then((res) => { this.setState({ items: res.data }) })
 
 
@@ -74,7 +74,7 @@ class FunnelSeries extends React.Component {
             return;
         }
 
-        axios.get('http://127.0.0.1:1337/funnel/series?id=' + this.state.id + '&from=' + formatDate(this.state.from, 'YYYY-MM-DD') + '&to=' + formatDate(this.state.to, 'YYYY-MM-DD'))
+        axios.get('http://82.148.28.184:1337/funnel/series?id=' + this.state.id + '&from=' + formatDate(this.state.from, 'YYYY-MM-DD') + '&to=' + formatDate(this.state.to, 'YYYY-MM-DD'))
             .then((res) => { this.setState({ data: res.data }) })
     }
 

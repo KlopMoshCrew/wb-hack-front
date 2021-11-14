@@ -17,7 +17,7 @@ class SallersFunnel extends React.Component {
     }
 
     getData() {
-        axios.get(`http://192.168.1.8:1337/funnel/total?id=${this.props.ecom_id}&from=${this.props.from}&to=${this.props.to}`)
+        axios.get(`http://82.148.28.184:1337/funnel/total?id=${this.props.ecom_id}&from=${this.props.from}&to=${this.props.to}`)
             .then((res) => {this.setState(res.data)})
     }
 
