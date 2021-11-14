@@ -34,7 +34,7 @@ class SallersFunnel extends React.Component {
     }
 
     render() {
-
+        // HELLO PIDR
         return (
             <Plot
                 data={[
