@@ -37,14 +37,6 @@ class GetRequest extends React.Component {
         <div>
             <FunnelSeries id={this.state.Id} key={this.state.Id} ref={this.childRef}/>
             <div  style={{ alignItems: "center" }}>
-                <Multiselect
-                    selectionLimit={1}
-                    options={this.state.items} // Options to display in the dropdown
-                    // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
-                    onSelect={this.onSelect} // Function will trigger on select event
-                    // onRemove={this.onRemove} // Function will trigger on remove event
-                    displayValue="name" // Property name to display in the dropdown options
-                /> 
                 <h5  style={{color: "black"}}>Табличка</h5>
                 <div  style={{color: "black"}}>
                     <Table striped bordered hover>

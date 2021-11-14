@@ -21,6 +21,8 @@
     "react-bootstrap": "^2.0.2",
     "react-bootstrap-table2-paginator": "^2.1.2",
     "react-chartjs-2": "^3.3.0",
+    "react-datepicker": "^4.3.0",
+    "react-day-picker": "^7.4.10",
     "react-dom": "^17.0.0"
   },
   "devDependencies": {

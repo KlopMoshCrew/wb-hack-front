@@ -196,7 +196,7 @@ function App() {
         </div>
 
         <div>
-            <GetRequest />
+            <FunnelSeries />
         </div>
         <Footer>
             <span>Клоп в трубе © 2021</span>
